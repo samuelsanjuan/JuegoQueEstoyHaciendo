@@ -16,7 +16,7 @@ public class IntentoDeVideojuego {
         System.out.println("Tu objetivo es llegar a la casilla 44, en la casilla 43 y 24 hay enemigos, horizontalmente te mueves de 10 en 10 y verticalemtnte de 1 en 1");  
  
 //estadiscticas tuyas
-double hp=50, atk=10 ,def=2, estamina=100, mana=25,dineros=0,defComprada = 0,hpComprada = 0,atkComprado = 0,lvl= 1.0;
+double manaComprado=0 ,estComprada=0, defComprada = 0,hpComprada = 0,atkComprado = 0,lvl= 1.0, hp=50+hpComprada, atk=10+atkComprado ,def=2+defComprada, estamina=100+estComprada, mana=25+manaComprado,dineros=0, estTot=100, hpTot=50, manaTot=25;
         
         //dibujamos el mapa
     Map<Integer, String> linkedHashMap = new LinkedHashMap<>();
@@ -33,7 +33,7 @@ linkedHashMap.put(32,"nada");
 linkedHashMap.put(33,"nada");
 linkedHashMap.put(34,"nada");
 linkedHashMap.put(41,"obstaculo");
-linkedHashMap.put(42,"nada");
+linkedHashMap.put(42,"tienda");
 linkedHashMap.put(43,"enemy");
 linkedHashMap.put(44,"objetivo");
 linkedHashMap.put(15,"obstaculo");
@@ -87,10 +87,52 @@ switch (movimiento) {
         System.out.println("te mueves con asdw");
         break;    
 }
-if ("enemy".equals(linkedHashMap.get(tuPosicion))){
-    
-          
-       
+
+//tienda
+if ("tienda".equals(linkedHashMap.get(tuPosicion))){
+System.out.println("hola soy la tienda, que quieres comprar");
+System.out.println("1=mejora de daño, 2=mejora de vida 3=mejora de mana 4=mejora de defensa");
+ estamina=estTot;
+ hp=hpTot;
+ mana=manaTot;
+int tienda=sc.nextInt();
+if (dineros>10){
+switch (tienda){
+    case 1:
+        
+        atkComprado=5;
+        atk=atk+atkComprado;
+        System.out.println("has comprado 5 de daño a cambio de 10 dineros, te quedan "+(dineros-10)+" monedicas");
+        dineros=dineros-10;
+        break;
+    case 2:
+        
+        hpComprada=25;
+        hpTot=hpTot+hpComprada;
+        hp=hpTot;
+        System.out.println("has comprado 25 de vida a cambio de 10 dineros, te quedan "+(dineros-10)+" monedicas");
+        dineros=dineros-10;
+        break;
+    case 3:
+        defComprada=1;
+        def=def+defComprada;
+        System.out.println("has comprado 1 de defensa a cambio de 10 dineros, te quedan "+(dineros-10)+" monedicas");
+        dineros=dineros-10;
+        break;
+    case 4:
+        manaComprado=25;
+        manaTot=manaTot+manaComprado;
+        mana=manaTot;
+        System.out.println("has comprado 25 de mana a cambio de 10 dineros, te quedan "+(dineros-10)+" monedicas");
+        break;
+    default:
+        System.out.println("buen viaje");break;
+}}
+else{System.out.println("eres pobre no te llega xd");}
+
+}
+
+if ("enemy".equals(linkedHashMap.get(tuPosicion))){       
 // estadisticas de los enemigos
        Enemigo limo=new Enemigo();
        limo.meterATK(5);
@@ -171,7 +213,7 @@ switch (enemyType){
         case 4:System.out.println("las opciones correr y items no estan implementadas aun");break;
         
   }}//fin de seleccion de accion y fin de bucleHP
-   if (limo.HP()<=0){System.out.println("Ganaste, te puedes volver a mover");dineros=dineros+2;
+   if (limo.HP()<=0){System.out.println("Ganaste, te puedes volver a mover");dineros=dineros+2;estamina=100+estComprada;
    }else {System.out.println("perdiste");}
 
 break;}
@@ -236,7 +278,7 @@ break;}
         case 3:System.out.println("las opciones correr y items no estan implementadas aun");break;
 
   }}//fin de seleccion de accion y fin de bucleHP
-   if (lobo.HP()<=0){System.out.println("Ganaste, te puedes volver a mover");dineros=dineros+5;
+   if (lobo.HP()<=0){System.out.println("Ganaste, te puedes volver a mover");dineros=dineros+5;estamina=100+estComprada;
    }else {System.out.println("perdiste");}
 
 break;}
@@ -301,7 +343,7 @@ case 3:{
         case 3:System.out.println("las opciones correr y items no estan implementadas aun");break;
 
   }}//fin de seleccion de accion y fin de bucleHP
-   if (bandido.HP()<=0){System.out.println("Ganaste, te puedes volver a mover");dineros=dineros+25;
+   if (bandido.HP()<=0){System.out.println("Ganaste, te puedes volver a mover");dineros=dineros+25;estamina=100+estComprada;
    }else {System.out.println("perdiste");}
 
 break;}
