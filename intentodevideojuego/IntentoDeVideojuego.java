@@ -90,22 +90,22 @@ switch (movimiento) {
 
 //tienda
 if ("tienda".equals(linkedHashMap.get(tuPosicion))){
-System.out.println("hola soy la tienda, que quieres comprar");
+System.out.println("hola soy la tienda, que quieres comprar, tienes "+dineros+" dineros");
 System.out.println("1=mejora de daño, 2=mejora de vida 3=mejora de mana 4=mejora de defensa");
  estamina=estTot;
  hp=hpTot;
  mana=manaTot;
-int tienda=sc.nextInt();
+String tienda=sc.next();
 if (dineros>10){
 switch (tienda){
-    case 1:
+    case "1":
         
         atkComprado=5;
         atk=atk+atkComprado;
         System.out.println("has comprado 5 de daño a cambio de 10 dineros, te quedan "+(dineros-10)+" monedicas");
         dineros=dineros-10;
         break;
-    case 2:
+    case "2":
         
         hpComprada=25;
         hpTot=hpTot+hpComprada;
@@ -113,13 +113,13 @@ switch (tienda){
         System.out.println("has comprado 25 de vida a cambio de 10 dineros, te quedan "+(dineros-10)+" monedicas");
         dineros=dineros-10;
         break;
-    case 3:
+    case "3":
         defComprada=1;
         def=def+defComprada;
         System.out.println("has comprado 1 de defensa a cambio de 10 dineros, te quedan "+(dineros-10)+" monedicas");
         dineros=dineros-10;
         break;
-    case 4:
+    case "4":
         manaComprado=25;
         manaTot=manaTot+manaComprado;
         mana=manaTot;
@@ -128,7 +128,7 @@ switch (tienda){
     default:
         System.out.println("buen viaje");break;
 }}
-else{System.out.println("eres pobre no te llega xd");}
+else{System.out.println("muevete, no tienes suficiente dinero");}
 
 }
 
@@ -149,23 +149,23 @@ if ("enemy".equals(linkedHashMap.get(tuPosicion))){
                
 
 System.out.println("contra quien te quieres enfrentar 1(limo) 2(lobo) o 3(bandido)?(aun no tienes herraminetas para ganarle al bandido)");
-int enemyType=sc.nextInt();
+String enemyType=sc.next();
 
 switch (enemyType){
-    case 1:{
+    case "1":{
         while ((limo.HP()>0) && (hp>0) && (estamina>0)){
         System.out.println("que quieres hacer 1=atacar, 2=magia, 3=item, o 4=correr");
-    int accion= sc.nextInt();
+    String accion= sc.next();
     
     switch (accion){
-        case 1:{
+        case "1":{
             
         System.out.println("que ataque quieres hacer? 1=fuerte 2=ligero 3=defensivo");
-        int tipoDeAtaque=sc.nextInt();
+        String tipoDeAtaque=sc.next();
         
         //ataque fuerte
             switch(tipoDeAtaque){
-                case 1:
+                case "1":
             limo.meterHp(limo.HP()-(atk*1.5-limo.DEF()));
             estamina=estamina-10;
             hp=hp-(limo.ATK()-def);
@@ -173,7 +173,7 @@ switch (enemyType){
                 break;
         
         //ataque debil
-                case 2:
+                case "2":
             limo.meterHp(limo.HP()-(atk-limo.DEF()));
             estamina=estamina-5;
             hp=hp-(limo.ATK()-def);
@@ -181,7 +181,7 @@ switch (enemyType){
                 break;
      
         //ataque defensivo
-                case 3:
+                case "3":
             limo.meterHp(limo.HP()-(atk-limo.DEF()));
             estamina=estamina-20;
             hp=hp-(limo.DEF()-def*1.5);
@@ -195,9 +195,9 @@ switch (enemyType){
 }}//fin de seleccion de ataque y fin de ejecucion de ataque
 
             //magia (funciona de forma rara despues de elegir ataque fisico te coje la primera accion que tengas despues)
-        case 9:break;
+        case "9":break;
         
-        case 2:
+        case "2":
             mana=mana-25;
             if (mana>=0){
             System.out.println("vas a usar magia");
@@ -209,8 +209,8 @@ switch (enemyType){
         break;
 
 
-        case 3:System.out.println("las opciones correr y items no estan implementadas aun");break;
-        case 4:System.out.println("las opciones correr y items no estan implementadas aun");break;
+        case "3":System.out.println("las opciones correr y items no estan implementadas aun");break;
+        case "4":System.out.println("las opciones correr y items no estan implementadas aun");break;
         
   }}//fin de seleccion de accion y fin de bucleHP
    if (limo.HP()<=0){System.out.println("Ganaste, te puedes volver a mover");dineros=dineros+2;estamina=100+estComprada;
@@ -218,20 +218,20 @@ switch (enemyType){
 
 break;}
 
-    case 2:{
+    case "2":{
         while ((lobo.HP()>0) && (hp>0) && (estamina>0)){
         System.out.println("que quieres hacer atacar=1, magia=2, item=3, o correr=4");
-    int accion= sc.nextInt();
+    String accion= sc.next();
     
     switch (accion){
-        case 1:{
+        case "1":{
             
         System.out.println("que ataque quieres hacer?1=fuerte 2=ligero 3=defensivo");
-        int tipoDeAtaque=sc.nextInt();
+        String tipoDeAtaque=sc.next();
         
         //ataque fuerte
             switch(tipoDeAtaque){
-                case 1:
+                case "1":
             lobo.meterHp(lobo.HP()-(atk*1.5-lobo.DEF()));
             estamina=estamina-10;
             hp=hp-(lobo.ATK()-def);
@@ -239,7 +239,7 @@ break;}
                 break;
         
         //ataque debil
-                case 2:
+                case "2":
             lobo.meterHp(lobo.HP()-(atk-lobo.DEF()));
             estamina=estamina-5;
             hp=hp-(lobo.ATK()-def);
@@ -247,7 +247,7 @@ break;}
                 break;
      
         //ataque defensivo
-                case 3:
+                case "3":
             lobo.meterHp(lobo.HP()-(atk-lobo.DEF()));
             estamina=estamina-20;
             hp=hp-(lobo.DEF()-def*1.5);
@@ -261,9 +261,9 @@ break;}
 }}//fin de seleccion de ataque y fin de ejecucion de ataque
 
             //magia (funciona de forma rara despues de elegir ataque fisico te coje la primera accion que tengas despues)
-        case 9:break;
+        case "9":break;
         
-        case 2:
+        case "2":
             mana=mana-25;
             if (mana>=0){
             System.out.println("vas a usar magia");
@@ -275,7 +275,8 @@ break;}
         break;
 
 
-        case 3:System.out.println("las opciones correr y items no estan implementadas aun");break;
+        case "3":System.out.println("las opciones correr y items no estan implementadas aun");break;
+        case "4":System.out.println("las opciones correr y items no estan implementadas aun");break;
 
   }}//fin de seleccion de accion y fin de bucleHP
    if (lobo.HP()<=0){System.out.println("Ganaste, te puedes volver a mover");dineros=dineros+5;estamina=100+estComprada;
@@ -283,20 +284,20 @@ break;}
 
 break;}
 
-case 3:{
+case "3":{
         while ((bandido.HP()>0) && (hp>0) && (estamina>0)){
         System.out.println("que quieres hacer atacar, magia, item, o correr");
-    int accion= sc.nextInt();
+    String accion= sc.next();
     
     switch (accion){
-        case 1:{
+        case "1":{
             
         System.out.println("que ataque quieres hacer? 1=fuerte 2=ligero 3=defensivo");
-        int tipoDeAtaque=sc.nextInt();
+        String tipoDeAtaque=sc.next();
         
         //ataque fuerte
             switch(tipoDeAtaque){
-                case 1:
+                case "1":
             bandido.meterHp(bandido.HP()-(atk*1.5-bandido.DEF()));
             estamina=estamina-10;
             hp=hp-(bandido.ATK()-def);
@@ -304,7 +305,7 @@ case 3:{
                 break;
         
         //ataque debil
-                case 2:
+                case "2":
             bandido.meterHp(bandido.HP()-(atk-bandido.DEF()));
             estamina=estamina-5;
             hp=hp-(bandido.ATK()-def);
@@ -312,7 +313,7 @@ case 3:{
                 break;
      
         //ataque defensivo
-                case 3:
+                case "3":
             bandido.meterHp(bandido.HP()-(atk-bandido.DEF()));
             estamina=estamina-20;
             hp=hp-(bandido.DEF()-def*1.5);
@@ -326,9 +327,9 @@ case 3:{
 }}//fin de seleccion de ataque y fin de ejecucion de ataque
 
             //magia (funciona de forma rara despues de elegir ataque fisico te coje la primera accion que tengas despues)
-        case 9:break;
+        case "9":break;
         
-        case 2:
+        case "2":
             mana=mana-25;
             if (mana>=0){
             System.out.println("vas a usar magia");
@@ -340,7 +341,8 @@ case 3:{
         break;
 
 
-        case 3:System.out.println("las opciones correr y items no estan implementadas aun");break;
+        case "3":System.out.println("las opciones correr y items no estan implementadas aun");break;
+        case "4":System.out.println("las opciones correr y items no estan implementadas aun");break;
 
   }}//fin de seleccion de accion y fin de bucleHP
    if (bandido.HP()<=0){System.out.println("Ganaste, te puedes volver a mover");dineros=dineros+25;estamina=100+estComprada;
